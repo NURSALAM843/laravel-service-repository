@@ -18,12 +18,12 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $db = [
             'title' => 'Kategori',
-            'data' =>  $this->kategoriService->getAll()
+            'data' =>  $this->kategoriService->getAll($request)
         ];
         return view('backoffice.kategori.index', $db);
     }

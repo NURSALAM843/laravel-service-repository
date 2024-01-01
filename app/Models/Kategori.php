@@ -9,4 +9,11 @@ class Kategori extends Model
 {
     use HasFactory;
     protected $fillable = ['nama'];
+
+    public function scopeFilter($query, $request)
+    {
+        if ( $request->filled('cari') ) {
+             $query->where('nama', 'LIKE', '%'.$request->cari.'%');
+        }
+    }
 }

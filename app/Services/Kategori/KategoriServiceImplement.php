@@ -19,8 +19,8 @@ class KategoriServiceImplement extends Service implements KategoriService{
     }
 
 
-    public function getAll(){
-      return $this->mainRepository->getALl();
+    public function getAll($request){
+      return $this->mainRepository->getALl($request);
     }
     public function getById($id){
       return $this->mainRepository->getById($id);

@@ -8,6 +8,6 @@ interface KategoriService extends BaseService{
 
     // Write something awesome :)
 
-    public function getAll();
+    public function getAll($request);
     public function getById($id);
 }

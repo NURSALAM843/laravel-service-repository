@@ -23,8 +23,8 @@ class KategoriRepositoryImplement extends Eloquent implements KategoriRepository
     }
 
 
-    public function getAll(){
-        return $this->model->latest()->paginate(30)->withQueryString();
+    public function getAll($request){
+        return $this->model->latest()->filter($request)->paginate(30)->withQueryString();
     }
     
     public function create($data){

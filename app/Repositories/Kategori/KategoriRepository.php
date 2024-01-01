@@ -10,6 +10,6 @@ interface KategoriRepository extends Repository{
     // Write something awesome :)
 
 
-    public function getALl();
+    public function getALl($request);
     public function getById($id);
 }
