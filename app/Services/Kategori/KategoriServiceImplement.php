@@ -2,6 +2,7 @@
 
 namespace App\Services\Kategori;
 
+use App\Models\Kategori;
 use LaravelEasyRepository\Service;
 use App\Repositories\Kategori\KategoriRepository;
 
@@ -22,17 +23,17 @@ class KategoriServiceImplement extends Service implements KategoriService{
     public function getAll($request){
       return $this->mainRepository->getALl($request);
     }
-    public function getById($id){
-      return $this->mainRepository->getById($id);
+    public function getById(Kategori $kategori){
+      return $this->mainRepository->getById($kategori);
     }
     public function create($data){
       return $this->mainRepository->create($data);
     }
-    public function update($id,$data){
-      return $this->mainRepository->update($id, $data);
+    public function updateBinding(Kategori $kategori, $data){
+      return $this->mainRepository->updateBinding($kategori, $data);
     }
-    public function delete($id){
-      return $this->mainRepository->delete($id);
+    public function deleteBinding(Kategori $kategori){
+      return $this->mainRepository->deleteBinding($kategori);
     }
 
     // Define your custom methods :)

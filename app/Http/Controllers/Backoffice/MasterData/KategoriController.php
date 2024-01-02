@@ -82,7 +82,7 @@ class KategoriController extends Controller
     {
         $db = [
             'title' => 'Ubah Data',
-            'data' =>  $this->kategoriService->getById($kategori->id)
+            'data' =>  $this->kategoriService->getById($kategori)
         ];
         return view('backoffice.kategori.edit', $db);
     }
@@ -94,7 +94,7 @@ class KategoriController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->kategoriService->update($kategori->id,$request);
+            $this->kategoriService->updateBinding($kategori,$request);
             DB::commit();
 
             session()->flash('flash', [
@@ -122,7 +122,7 @@ class KategoriController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->kategoriService->delete($kategori->id);
+            $this->kategoriService->deleteBinding($kategori);
             DB::commit();
 
             session()->flash('flash', [

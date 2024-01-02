@@ -32,20 +32,19 @@ class KategoriRepositoryImplement extends Eloquent implements KategoriRepository
             'nama'  => $data->nama
         ]);
     }
-    public function getById($id){
-        return $this->model->where('id', $id)->first();
+    public function getById(Kategori $kategori){
+        return $kategori;
     }
-    public function update($id, $data){
-        return $this->model->where('id', $id)->first()->update([
+    public function updateBinding(Kategori $kategori, $data){
+        return $kategori->update([
             'nama'  => $data->nama
         ]);
     }
 
 
-    public function delete($id){
-        return $this->model->where('id', $id)->first()->delete();
+    public function deleteBinding(Kategori $kategori){
+        return $kategori->delete();
     }
 
-    // Write something awesome :)
 }
 
