@@ -20,10 +20,11 @@ class KategoriController extends Controller
      */
     public function index(Request $request)
     {
-
+        $data = $this->kategoriService->getAll($request);
+        // dd(collect($data));
         $db = [
             'title' => 'Kategori',
-            'data' =>  $this->kategoriService->getAll($request)
+            'data' =>  $data
         ];
         return view('backoffice.kategori.index', $db);
     }
@@ -44,27 +45,24 @@ class KategoriController extends Controller
      */
     public function store(KategoriRequest $request)
     {
-        DB::beginTransaction();
-        try {
-            $this->kategoriService->create($request);
-            DB::commit();
+        $result = $this->kategoriService->createBinding($request);
 
+        if ($result['success']) {
             session()->flash('flash', [
-                'message' => 'Data Berhasil Ditambah',
-                'type' => 'success'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
 
             return redirect()->route('backoffice.master-data.kategori.index');
-        } catch (Exception $e) {
-            DB::rollBack();
-
+        } else {
             session()->flash('flash', [
-                'message' => $e->getMessage(),
-                'type' => 'danger'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
-        }
 
-        return redirect()->back()->withInput();
+            return redirect()->back()->withInput();
+        }
+     
     }
 
     /**
@@ -92,27 +90,24 @@ class KategoriController extends Controller
      */
     public function update(KategoriRequest $request, Kategori $kategori)
     {
-        DB::beginTransaction();
-        try {
-            $this->kategoriService->updateBinding($kategori,$request);
-            DB::commit();
+        $result = $this->kategoriService->updateBinding($kategori,$request);
 
+        if ($result['success']) {
             session()->flash('flash', [
-                'message' => 'Data Berhasil Diubah',
-                'type' => 'success'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
 
             return redirect()->route('backoffice.master-data.kategori.index');
-        } catch (Exception $e) {
-            DB::rollBack();
-
+        } else {
             session()->flash('flash', [
-                'message' => $e->getMessage(),
-                'type' => 'danger'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
-        }
 
-        return redirect()->back()->withInput();
+            return redirect()->back()->withInput();
+        }
+       
     }
 
     /**
@@ -120,26 +115,23 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        DB::beginTransaction();
-        try {
-            $this->kategoriService->deleteBinding($kategori);
-            DB::commit();
+        $result = $this->kategoriService->deleteBinding($kategori);
 
+        if ($result['success']) {
             session()->flash('flash', [
-                'message' => 'Data Berhasil Dihapus',
-                'type' => 'success'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
 
             return redirect()->route('backoffice.master-data.kategori.index');
-        } catch (Exception $e) {
-            DB::rollBack();
-
+        } else {
             session()->flash('flash', [
-                'message' => $e->getMessage(),
-                'type' => 'danger'
+                'message' => $result['message'],
+                'type' => $result['type'],
             ]);
-        }
 
-        return redirect()->back()->withInput();
+            return redirect()->back()->withInput();
+        }
+       
     }
 }

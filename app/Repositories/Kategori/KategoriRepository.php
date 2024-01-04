@@ -15,4 +15,5 @@ interface KategoriRepository extends Repository{
     public function getById(Kategori $kategori);
     public function updateBinding(Kategori $kategori, $data);
     public function deleteBinding(Kategori $kategori);
+    public function createBinding($request);
 }

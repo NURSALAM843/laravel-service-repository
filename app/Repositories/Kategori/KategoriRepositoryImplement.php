@@ -27,20 +27,19 @@ class KategoriRepositoryImplement extends Eloquent implements KategoriRepository
         return $this->model->latest()->filter($request)->paginate(30)->withQueryString();
     }
     
-    public function create($data){
+    public function createBinding($request){
         return $this->model->create([
-            'nama'  => $data->nama
+            'nama'  => $request->nama
         ]);
     }
     public function getById(Kategori $kategori){
         return $kategori;
     }
-    public function updateBinding(Kategori $kategori, $data){
+    public function updateBinding(Kategori $kategori, $request){
         return $kategori->update([
-            'nama'  => $data->nama
+            'nama'  => $request->nama
         ]);
     }
-
 
     public function deleteBinding(Kategori $kategori){
         return $kategori->delete();
